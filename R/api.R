@@ -22,4 +22,4 @@ pr("R/plumber.R") %>%
 
         spec
     }) %>%
-    pr_run(port = 32452)
+    pr_run(port = 8000)

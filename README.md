@@ -4,7 +4,7 @@ This repository contains the [`plumber`](https://www.rplumber.io) code for
 roughness prediction and SRC generation based on the GBM model from the
 in-review paper:
 
-> Johnson, J.M., Eyelade D., Clarke K.C, Singh-Mohudpur, J. (2021) “Characterizing Reach-level Empirical Roughness Along the National Hydrography Network: Developing DEM-based Synthetic Rating Curves.”
+> Johnson, J.M., Eyelade D., Clarke K.C, Singh-Mohudpur, J. (2021) *“Characterizing Reach-level Empirical Roughness Along the National Hydrography Network: Developing DEM-based Synthetic Rating Curves.”*
 
 For more information, see: [nhd-roughness](https://github.com/mikejohnson51/nhd-roughness).
 

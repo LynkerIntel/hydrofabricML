@@ -1,3 +1,5 @@
+gbm_dir <- "/app/src-api/data/gbm/"
+
 #* Return roughness prediction
 #* @param pathlength:[dbl]
 #* @param arbolatesu:[dbl]
@@ -16,7 +18,7 @@ function(pathlength, arbolatesu, lengthkm, areasqkm, slope) {
     )
 
     sim <- gbm::predict.gbm(
-        object = readRDS("../data/gbm/roughness.rds")$finalModel,
+        object = readRDS(paste0(gbm_dir, "roughness.rds"))$finalModel,
         newdata = newdata
     )
 
@@ -40,7 +42,7 @@ function(pathlength, arbolatesu, lengthkm, areasqkm, slope) {
     )
 
     sim <- gbm::predict.gbm(
-        object = readRDS("../data/gbm/freq.rds")$finalModel,
+        object = readRDS(paste0(gbm_dir, "freq.rds"))$finalModel,
         newdata = newdata
     )
 
@@ -64,7 +66,7 @@ function(pathlength, arbolatesu, lengthkm, areasqkm, slope) {
     )
 
     sim <- gbm::predict.gbm(
-        object = readRDS("../data/gbm/freq-y.rds")$finalModel,
+        object = readRDS(paste0(gbm_dir, "freq-y.rds"))$finalModel,
         newdata = newdata
     )
 

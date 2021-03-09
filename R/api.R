@@ -1,7 +1,7 @@
 library(plumber)
 library(gbm)
 
-pr("R/plumber.R") %>%
+pr("/app/src-api/R/plumber.R") %>%
     pr_set_api_spec(function(spec) {
         spec$info <- list(
             title = "Synthetic Rating Curves API",

@@ -17,7 +17,7 @@ pr("/app/src-api/R/plumber.R") %>%
                 name = "MIT",
                 url = "https://opensource.org/licenses/MIT"
             ),
-            version = "0.0.1"
+            version = "0.0.2"
         )
 
         spec

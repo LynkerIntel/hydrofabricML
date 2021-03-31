@@ -81,7 +81,8 @@ function(pathlength, arbolatesu, lengthkm, areasqkm, slope) {
 #* @param ymin:[chr] South latitude for bounding box.
 #* @param ymax:[chr] North latitude for bounding box.
 #* @param stages:[dbl] stages used to generate SRC.
-#* @param slope_scale:[dbl] Ratio of vertical units to horizonal. See [gdaldem](https://gdal.org/programs/gdaldem.html).
+#* @param slope_scale:[dbl] Ratio of vertical units to horizonal.
+#*        See [gdaldem](https://gdal.org/programs/gdaldem.html).
 #* @post /src
 function(xmin, xmax, ymin, ymax, stages = 0:20, slope_scale = 111120) {
     # From bbox around CONUS
@@ -108,7 +109,10 @@ function(xmin, xmax, ymin, ymax, stages = 0:20, slope_scale = 111120) {
     comids <- FloodMapping::find_comids(aoi)
 
     if (length(comids) > 25) {
-        rlang::abort("Area is too big, contains > 25 COMIDs.")
+        rlang::abort(paste0(
+            "Area is too big, contains > 25 COMIDs.\n",
+            "Please subset your COMIDs and perform batch calls"
+        ))
     }
 
     FloodMapping::get_src(

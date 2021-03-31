@@ -31,6 +31,7 @@ function(pathlength, arbolatesu, lengthkm, areasqkm, slope) {
 #* @param lengthkm:[dbl]
 #* @param areasqkm:[dbl]
 #* @param slope:[dbl]
+#* @response default freq coefficient prediction
 #* @post /freq
 function(pathlength, arbolatesu, lengthkm, areasqkm, slope) {
     newdata <- tibble::tibble(
@@ -55,6 +56,7 @@ function(pathlength, arbolatesu, lengthkm, areasqkm, slope) {
 #* @param lengthkm:[dbl]
 #* @param areasqkm:[dbl]
 #* @param slope:[dbl]
+#* @response default freq(y) coefficient prediction
 #* @post /freq-y
 function(pathlength, arbolatesu, lengthkm, areasqkm, slope) {
     newdata <- tibble::tibble(
@@ -71,4 +73,51 @@ function(pathlength, arbolatesu, lengthkm, areasqkm, slope) {
     )
 
     exp(sim)
+}
+
+#* Generate Synthetic Rating Curve for a given bounding box
+#* @param xmin:[chr] West longitude for bounding box.
+#* @param xmax:[chr] East longitude for bounding box.
+#* @param ymin:[chr] South latitude for bounding box.
+#* @param ymax:[chr] North latitude for bounding box.
+#* @param stages:[dbl] stages used to generate SRC.
+#* @param slope_scale:[dbl] Ratio of vertical units to horizonal.
+#*        See [gdaldem](https://gdal.org/programs/gdaldem.html).
+#* @post /src
+function(xmin, xmax, ymin, ymax, stages = 0:20, slope_scale = 111120) {
+    # From bbox around CONUS
+    if (!all(xmin > -124.72584,
+             xmax < -66.94989,
+             ymax < 49.38436,
+             ymin > 24.49813)) {
+
+        rlang::abort("Service implemented only for CONUS.")
+
+    }
+
+    res <- matrix(
+        c(ymax, xmin,
+          ymax, xmax,
+          ymin, xmax,
+          ymin, xmin,
+          ymax, xmin),
+        ncol = 2,
+        byrow = TRUE
+    )
+
+    aoi    <- sf::st_polygon(list(res))
+    comids <- FloodMapping::find_comids(aoi)
+
+    if (length(comids) > 25) {
+        rlang::abort(paste0(
+            "Area is too big, contains > 25 COMIDs.\n",
+            "Please subset your COMIDs and perform batch calls"
+        ))
+    }
+
+    FloodMapping::get_src(
+        comids = comids,
+        stage = stages,
+        slope_scale = slope_scale,
+        progress = FALSE)
 }

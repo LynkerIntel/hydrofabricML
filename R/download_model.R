@@ -26,6 +26,10 @@ download_model <- function() {
 #' @importFrom utils download.file
 #' @keywords internal
 .download_model <- function() {
+    if (!dir.exists(.get_model_dir())) {
+        dir.create(.get_model_dir())
+    }
+
     download.file(.get_model_url(), .get_model_path())
 }
 

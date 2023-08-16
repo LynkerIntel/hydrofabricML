@@ -1,0 +1,26 @@
+Package: hydrofab.roughness
+Title: Generate GBM-based prediction for Manning's n
+Version: 0.1.0.9000
+Authors@R: c(person(given = "Mike", 
+                    family = "Johnson", 
+                    role = c("aut", "cre"), 
+                    comment = c(ORCID = "0000-0002-5288-8350"), 
+                    email = "jjohnson@lynker.com"),
+             person(given = "Justin",
+                    family = "Singh-Mohudpur",
+                    role = c("aut"),
+                    comment = c(ORCID = "0000-0002-5233-5799"),
+                    email = "jsmohudpur@lynker.com"))
+Description: Uses a gradient boosting machine learning model trained on
+             the NHDPlus Value-added Attributes (VAA) for 7K NHD reaches
+             to generate predicted Manning's n values.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Depends:
+    R (>= 3.5.0)
+Imports:
+    cli,
+    gbm,
+    rappdirs

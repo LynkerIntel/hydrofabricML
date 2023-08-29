@@ -4,7 +4,7 @@
 \alias{hr_predict}
 \title{Predict roughness values using GBM model.}
 \usage{
-hr_predict(newdata)
+hr_predict(newdata, ..., override_path = NULL)
 }
 \arguments{
 \item{newdata}{(\code{data.frame})\cr

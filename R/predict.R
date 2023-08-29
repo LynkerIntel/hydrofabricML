@@ -3,6 +3,8 @@
 #'        Must contain the correct predictor columns, i.e.
 #'        "pathlength", "arbolatesu", "lengthkm", "areasqkm", "slope"
 #' @return `data.frame` with the column `$.pred` containing the predictions.
+#' @importFrom stats predict
+#' @importFrom gbm predict.gbm
 #' @export
 hr_predict <- function(newdata, ..., override_path = NULL) {
     ..subset <- .preprocess(newdata)
@@ -15,7 +17,7 @@ hr_predict <- function(newdata, ..., override_path = NULL) {
     }
 
     data.frame(
-        .pred = exp(gbm::predict.gbm(
+        .pred = exp(predict(
             object  = .get_model(),
             newdata = ..subset
         ))

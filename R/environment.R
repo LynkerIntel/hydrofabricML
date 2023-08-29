@@ -12,7 +12,7 @@
 #' @keywords internal
 .load_model <- function(override_path = NULL) {
     path <- if (!is.null(override_path)) override_path else .get_model_path()
-    assign("model", readRDS(path)$finalModel, envir = ..env)
+    assign("model", readRDS(path), envir = ..env)
 }
 
 #' Unload model from memory

@@ -50,4 +50,3 @@ download_model <- function() {
 .model_exists <- function() {
     file.exists(.get_model_path())
 }
-

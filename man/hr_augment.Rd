@@ -4,7 +4,7 @@
 \alias{hr_augment}
 \title{Augment data with GBM-based roughness predictions.}
 \usage{
-hr_augment(newdata, ..., override_path = NULL)
+hr_augment(newdata, ..., global = 0.05, override_path = NULL)
 }
 \arguments{
 \item{newdata}{(\code{data.frame})\cr

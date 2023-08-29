@@ -26,10 +26,11 @@ disable_assertions <- function() {
 #' cannot be found, then it defaults to FALSE.
 #' @keywords internal
 .is_assert_disabled <- function() {
-    tryCatch(
-        get("disable_assert", envir = ..env),
-        error = function(x) FALSE
-    )
+    if (! "disable_assert" %in% ls(..env)) {
+        return(FALSE)
+    }
+
+    get("disable_assert", envir = ..env)
 }
 
 #' This assertion checks that the `.predictors` columns
@@ -40,13 +41,13 @@ disable_assertions <- function() {
 
     found_predictors <- .predictors %in% names(newdata)
     if (!all(found_predictors)) {
-        cli::cli_abort(
+        .set_error(cli::cli_abort(
             paste(
                 "`newdata` cannot be used for predictions,",
                 "missing {sum(!found_predictors)} predictor{?s}:",
                 "{(.predictors[!found_predictors])}"
             )
-        )
+        ))
     }
 }
 
@@ -73,7 +74,7 @@ disable_assertions <- function() {
 
     contains_invalid <- na.omit(contains_invalid)
     if (length(contains_invalid) > 0) {
-        cli::cli_abort(
+        .set_error(cli::cli_abort(
             c(
                 "`newdata` cannot be used for predictions:",
                 setNames(
@@ -81,6 +82,6 @@ disable_assertions <- function() {
                     rep("x", times = length(contains_invalid))
                 )
             )
-        )
+        ))
     }
 }

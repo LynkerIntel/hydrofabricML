@@ -25,3 +25,5 @@ Imports:
     caret,
     gbm,
     rappdirs
+Suggests:
+    sf

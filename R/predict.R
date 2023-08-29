@@ -5,6 +5,7 @@
 #' @return `data.frame` with the column `$.pred` containing the predictions.
 #' @importFrom stats predict
 #' @importFrom gbm predict.gbm
+#' @importFrom caret predict.train
 #' @export
 hr_predict <- function(newdata, ..., override_path = NULL) {
     ..subset <- .preprocess(newdata)
